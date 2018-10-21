@@ -1,18 +1,18 @@
-#!/usr/bin/env bash
+#!/bin/sh
 
 # variables of the colors
-cyan='\033[36;1m'
-red='\033[31;1m'
-green='\033[32;1m'
-end='\033[m'
+cyan=$(tput bold; tput setaf 6)
+red=$(tput bold; tput setaf 1)
+green=$(tput bold; tput setaf 2)
+end=$(tput sgr0)
 
 while [ $1 ]; do
-   if which "$1" &> /dev/null; then
+   if type "$1" > /dev/null; then
       # get the location of the directory to show in the output
-      dir=$(which "$1")
-	echo -e "${cyan}${1} is installed in the system.${end} ${green}Directory: ${dir}${end}"
+      echo "${cyan}${1} is installed in the system.${end}"
+      # Directory: ${dir}${end}
    else
-      echo -e "${red}${1} is not installed in the system.${end}"
+      echo "${red}${1} is not installed in the system.${end}"
    fi
    shift
 done
